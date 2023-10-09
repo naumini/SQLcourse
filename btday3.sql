@@ -33,7 +33,7 @@ where (referee_id is NULL) or (referee_id != 2);
 select name, population, area from World
 where area >= 3000000 or population >= 25000000;
 --bai12
-select distinct author_id from Views
+select distinct author_id as id from Views
 where author_id = viewer_id
 order by author_id ASC ;
 --bai13
