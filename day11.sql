@@ -83,6 +83,29 @@ JOIN film_actor as fa ON
 a.actor_id=fa.actor_id
 group by a.first_name, a.last_name
 order by sl_phim desc
+--q6
+select ad.address from address as ad
+LEFT JOIN customer as cm ON
+cm.address_id=ad.address_id
+WHERE cm.address_id is NULL  
+--q7
+select c.city,
+count(pm.amount) as revenue from city as c
+JOIN address as ad on c.city_id=ad.city_id
+JOIN customer as cr on cr.address_id=ad.city_id
+JOIN payment as pm on pm.customer_id=cr.customer_id
+group by c.city
+order by revenue desc
+--q8
+select c.city,
+count(pm.amount) as revenue, ct.country from city as c
+JOIN address as ad on c.city_id=ad.city_id
+JOIN customer as cr on cr.address_id=ad.city_id
+JOIN payment as pm on pm.customer_id=cr.customer_id
+JOIN country as ct on c.country_id=ct.country_id
+group by c.city, ct.country
+order by revenue desc
+
 
 
 
