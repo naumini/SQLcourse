@@ -90,7 +90,7 @@ cm.address_id=ad.address_id
 WHERE cm.address_id is NULL  
 --q7
 select c.city,
-count(pm.amount) as revenue from city as c
+sum(pm.amount) as revenue from city as c
 JOIN address as ad on c.city_id=ad.city_id
 JOIN customer as cr on cr.address_id=ad.city_id
 JOIN payment as pm on pm.customer_id=cr.customer_id
@@ -98,7 +98,7 @@ group by c.city
 order by revenue desc
 --q8
 select c.city,
-count(pm.amount) as revenue, ct.country from city as c
+sum(pm.amount) as revenue, ct.country from city as c
 JOIN address as ad on c.city_id=ad.city_id
 JOIN customer as cr on cr.address_id=ad.city_id
 JOIN payment as pm on pm.customer_id=cr.customer_id
