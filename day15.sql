@@ -54,3 +54,4 @@ select category, product, total_spend
 from bang2
 where rank <3
 --b8
+bai 8 em chua lam kip nha c Julie oi, de mai em lam tiep :>>
