@@ -54,4 +54,19 @@ select category, product, total_spend
 from bang2
 where rank <3
 --b8
-bai 8 em chua lam kip nha c Julie oi, de mai em lam tiep :>>
+WITH bang1 AS
+(SELECT a.artist_id, a.artist_name, b.song_id
+from artists as a 
+INNER JOIN songs as b ON a.artist_id=b.artist_id
+INNER JOIN global_song_rank as c on c.song_id=b.song_id),
+bang2 as 
+(SELECT *,ROW_NUMBER() 
+OVER(PARTITION BY artist_name ORDER BY artist_name) 
+as artist_rank from bang1)
+SELECT DISTINCT artist_name, artist_rank from bang2
+where artist_rank <=5
+ORDER BY artist_rank 
+(bai nay sao em dung row_number roi ma no ra van bi trung lap vay chi?)
+
+
+
