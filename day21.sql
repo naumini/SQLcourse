@@ -44,11 +44,13 @@ FROM bigquery-public-data.thelook_ecommerce.users)
 ORDER BY youngest_age
 4. Top 5 sản phẩm mỗi tháng.
 WITH bang1 as (
-SELECT DISTINCT a.product_id, product_name, TO_CHAR(created_at, 'yyyy-mm') AS month_year, ROUND(SUM(sale_price),2) AS sales,
+SELECT DISTINCT a.product_id, product_name, 
+extract(year from created_at)|| '-' || extract (month from created_at)  AS month_year, 
+ROUND(SUM(sale_price),2) AS sales,
 ROUND(SUM(cost),2) AS cost,
 ROUND((SUM(sale_price) - SUM(cost)),2) AS profit
-FROM `bigquery-public-data.thelook_ecommerce.order_items` AS a
-JOIN `bigquery-public-data.thelook_ecommerce.inventory_items` AS b
+FROM bigquery-public-data.thelook_ecommerce.order_items AS a
+JOIN bigquery-public-data.thelook_ecommerce.inventory_items AS b
 ON a.product_id = b.product_id
 WHERE (a.created_at) BETWEEN '2019-01-01'AND '2022-04-30'
 AND a.status= 'Complete'
